@@ -136,12 +136,20 @@ class Init{
 			//$appname = 'mobile';
 		//}
 		
-		// 域名前缀
+		// 域名前缀分析
 		$domain = $_SERVER['HTTP_HOST'];
 		$parseDomain = explode('.',$domain);
-		if(isset($parseDomain[0]) && array_key_exists($parseDomain[0],$this->config['global']['domain_prefix'])){
-			$appname = $this->config['global']['domain_prefix'][$parseDomain[0]];
-		}
+		foreach($this->config['global']['registerApp'] as $key=>$val){
+		    if (isset($val['domain_prefix'])){
+                if(in_array($parseDomain[0], $val['domain_prefix'])){
+                    $appname = $key;
+                }
+            }
+        }
+
+		//if(isset($parseDomain[0]) && array_key_exists($parseDomain[0],$this->config['global']['domain_prefix'])){
+			//$appname = $this->config['global']['domain_prefix'][$parseDomain[0]];
+		//}
 		return $appname;
 	}
 	
