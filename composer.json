@@ -10,7 +10,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Zeyuan\\Cherry\\": "src/"
+            "Zeyuan\\Cherry\\": "src/",
+			"App\\":"app/"
         }
     },
     "authors": [
