@@ -3,7 +3,6 @@
     "description": "mvc module",
     "type": "library",
     "require": {
-        "owasp/phprbac": "dev-develop",
         "nikic/fast-route": "2.0.x-dev",
         "thingengineer/mysqli-database-class": "dev-master"
     },
