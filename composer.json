@@ -1,0 +1,23 @@
+{
+    "name": "zeyuan/cherry",
+    "description": "mvc module",
+    "type": "library",
+    "require": {
+        "owasp/phprbac": "dev-develop",
+        "nikic/fast-route": "2.0.x-dev",
+        "thingengineer/mysqli-database-class": "dev-master"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Zeyuan\\Cherry\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "zeyuancv",
+            "email": "11424931+zeyuancv@user.noreply.gitee.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
