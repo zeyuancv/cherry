@@ -3,8 +3,7 @@
     "description": "mvc module",
     "type": "library",
     "require": {
-        "nikic/fast-route": "2.0.x-dev",
-        "thingengineer/mysqli-database-class": "dev-master"
+
     },
     "license": "MIT",
     "autoload": {
