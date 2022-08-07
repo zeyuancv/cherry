@@ -24,7 +24,7 @@ class Init{
 		$this->loadFunctions();
 		
         // 获取应用名称
-		$this->currentAppName = $this->getApp();
+		$this->currentAppName = $this->getAppName();
 		
 		// 检测开发环境
         $this->setReporting();
@@ -92,8 +92,19 @@ class Init{
 				$data = ['appName'=> $this->currentAppName,
 						'actionName'=>$actionName,
 						'controllerName'=>$currentControllerName
-				];
-				
+				] + $this->appConfigs;
+
+				// 全页缓存
+                $cache = '';
+                foreach ($this->appConfigs as $val){
+                    // 缓存类型
+                    if(isset($val['cache']) && count($val['cache'])>0){
+                        $cache = $val['cache'];
+                    }
+                }
+
+                defined('CACHE') or define('CACHE', $cache);
+
 				$controllerName = '\\App\\' . $controllerName; 
 				if(class_exists ( $controllerName )){
 					$app = new $controllerName($data);
@@ -121,7 +132,7 @@ class Init{
 	}
 	
 	// 获取应用名称
-	private function getApp(){
+	private function getAppName(){
 		$url = $_SERVER["REQUEST_URI"];
 		$urlarry = explode('/', $url);
 		$appname = $this->config['global']['defaultapp'];
@@ -221,10 +232,13 @@ class Init{
 		if(isset($this->config['global']['db']['tbPrefix'])){
 			define('TB_PREFIX', $this->config['global']['db']['tbPrefix']);
 		}
-		if(isset($this->config['global']['db']['port'])){
-			define('TB_PREFIX', $this->config['global']['db']['port']);
+		if(isset($this->config['global']['db']['tbPrefix'])){
+			define('TB_PREFIX', $this->config['global']['db']['tbPrefix']);
 		}
-		
+        if(isset($this->config['global']['db']['port'])){
+            define('DB_PORT', $this->config['global']['db']['port']);
+        }
+
 		if(count($this->appConfigs)>0){
 			if(isset($this->appConfigs['config']['dbDrive'])){
 			$dbDrive = $this->appConfigs['config']['dbDrive'];
